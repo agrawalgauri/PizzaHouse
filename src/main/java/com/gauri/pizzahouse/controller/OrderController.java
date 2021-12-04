@@ -3,6 +3,7 @@ package com.gauri.pizzahouse.controller;
 import com.gauri.pizzahouse.model.Order;
 import com.gauri.pizzahouse.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,8 +35,13 @@ public class OrderController {
     }
 
     @PutMapping("{id}")
-    public Order updateOrder(@RequestBody Order order,@PathVariable Integer id) {
+    public Order updateOrder(@RequestBody Order order, @PathVariable Integer id) {
         order.setId(id);
         return orderService.updateOrder(order);
+    }
+
+    @DeleteMapping("{id}")
+    public void deleteOrder(@PathVariable Integer id) {
+        orderService.deleteOrder(id);
     }
 }
