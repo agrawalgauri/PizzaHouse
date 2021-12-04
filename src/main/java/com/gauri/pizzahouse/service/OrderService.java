@@ -19,4 +19,23 @@ public class OrderService {
     public List<Order> getOrders() {
         return orderRepository.findAll();
     }
+
+    public Order createOrder(Order order) {
+        return orderRepository.saveWithId(order);
+    }
+    public Order updateOrder(Order order){
+        Order dbOrder = orderRepository.findById(order.getId()).orElse(null);
+       if(dbOrder!=null)
+        {
+            if(order.getName()!=null){
+                dbOrder.setName(order.getName());
+            }
+            if(order.getIngredients()!=null){
+                dbOrder.setIngredients(order.getIngredients());
+            }
+            orderRepository.save(dbOrder);
+        }
+       return dbOrder;
+    }
+
 }
