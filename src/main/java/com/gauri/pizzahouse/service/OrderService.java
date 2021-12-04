@@ -37,5 +37,11 @@ public class OrderService {
         }
        return dbOrder;
     }
+    public void deleteOrder(Integer id){
+        Order dbOrder = orderRepository.findById(id).orElse(null);
+        if(dbOrder!=null){
+            orderRepository.deleteById(id);
+        }
+    }
 
 }
